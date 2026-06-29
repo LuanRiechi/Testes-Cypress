@@ -57,6 +57,17 @@ describe('example to-do app', () => {
       .should('have.text', newItem)
   })
 
+  it('can delete a todo item', () => {
+    cy.contains('Walk the dog')
+      .parents('li')
+      .find('.destroy')
+      .click({ force: true })
+
+    cy.get('.todo-list li')
+      .should('have.length', 1)
+      .should('not.have.text', 'Walk the dog')
+  })
+
   it('can check off an item as completed', () => {
     // In addition to using the `get` command to get an element by selector,
     // we can also use the `contains` command to get an element by its contents.

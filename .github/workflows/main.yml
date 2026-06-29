@@ -12,13 +12,10 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          command: npm run cypress:run
-      # after the test run completes store videos and any screenshots
+      # Install npm dependencies and run Cypress tests directly
+      - name: Run Cypress tests
+        run: npm run cypress:run
+      # After the test run completes, store videos and any screenshots
       - uses: actions/upload-artifact@v4
         # add the line below to store screenshots only on failures
         if: failure()
